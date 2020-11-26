@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 black = "==20.8b1"
+funcy = "==1.15"
 mock = "==4.0.2"
 pytest = "==6.1.0"
 pytest-flask = "==1.0.0"
@@ -15,7 +16,7 @@ pytest-parametrization = "==2019.1.4"
 flask = "==1.1.2"
 python-dateutil = "==2.8.1"
 requests = "==2.24.0"
-protobuf = "*"
+redis-py-cluster = "==2.1.0"
 
 [requires]
 python_version = "3.8"
