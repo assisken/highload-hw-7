@@ -5,11 +5,13 @@ from urllib.parse import urlencode
 import requests
 
 from app.models import Forecast, Unit
+from app.rediska import cache
 
 API_URL = "https://api.openweathermap.org/data/2.5/forecast"
 API_KEY = os.getenv("API_KEY")
 
 
+@cache
 def retrieve_forecast(
     city: str, timestamp: datetime, units: Unit = Unit.CELSIUS
 ) -> Forecast:
@@ -26,4 +28,4 @@ def retrieve_forecast(
             temp = time["main"]["temp"]
     if temp is None:
         raise ValueError("Temperature not found")
-    return Forecast(city=data["city"]["name"], temperature=temp)
+    return Forecast(city=data["city"]["name"], temperature=round(temp - 273, 2), timestamp=timestamp.isoformat())

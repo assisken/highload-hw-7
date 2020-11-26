@@ -1,56 +1,76 @@
-version: '3.7'
+version: '3'
 services:
+  app:
+    image: assisken/service-weather-redis:latest
+    network_mode: host
+    environment:
+      - API_KEY=e1f7845cff6a49b73a89c76a6e6d71f5
+    ports:
+      - "8000:80"
+    depends_on:
+      - redis-1
+      - redis-2
+      - redis-3
+      - redis-4
+      - redis-5
+      - redis-6
   redis-1:
+    container_name: redis-1
     build:
       context: .
       dockerfile: Dockerfile
       args:
         PORT_CONFIG: 7001
-    network_mode: "host"
+    network_mode: host
     ports:
       - "7001:7001"
   redis-2:
+    container_name: redis-2
     build:
       context: .
       dockerfile: Dockerfile
       args:
         PORT_CONFIG: 7002
-    network_mode: "host"
+    network_mode: host
     ports:
       - "7002:7002"
   redis-3:
+    container_name: redis-3
     build:
       context: .
       dockerfile: Dockerfile
       args:
         PORT_CONFIG: 7003
-    network_mode: "host"
+    network_mode: host
     ports:
       - "7003:7003"
   redis-4:
+    container_name: redis-4
     build:
       context: .
       dockerfile: Dockerfile
       args:
         PORT_CONFIG: 7004
-    network_mode: "host"
+    network_mode: host
     ports:
       - "7004:7004"
   redis-5:
+    container_name: redis-5
     build:
       context: .
       dockerfile: Dockerfile
       args:
         PORT_CONFIG: 7005
-    network_mode: "host"
+    network_mode: host
     ports:
       - "7005:7005"
   redis-6:
+    container_name: redis-6
     build:
       context: .
       dockerfile: Dockerfile
       args:
         PORT_CONFIG: 7006
-    network_mode: "host"
+    network_mode: host
     ports:
       - "7006:7006"

@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, asdict
 from enum import Enum
 
 
@@ -10,7 +10,8 @@ class Unit(Enum):
 class Forecast:
     city: str
     temperature: float
-    unit: Unit = field(default=Unit.CELSIUS.value)
+    timestamp: str
+    unit: Unit = Unit.CELSIUS.value
 
     def as_json(self):
-        return {"city": self.city, "temperature": self.temperature, "unit": self.unit}
+        return asdict(self)
