@@ -1,38 +1,26 @@
-# Лабораторная работа №1/2 по Highload
-
-## О сервисе
-Наприсан на Python / Flask, можно поднять через докер.
+# Лабораторная работа №7 по Highload
 
 ## Установка и запуск
 ```bash
-$ docker build -t highload .
-$ docker run -e API_KEY="<api key>" -p 8000:8000 --rm -it highload
+docker-compose up
 ```
 
-## API
+## Полезные скрипты
 
-### `/v1/forecast/`
-Показывает погоду в заданном городе в заданном времени.
+Записать кучу данных на редисы:
 
-#### Аргументы
-city `str` — название города на английском,
-
-dt `str` — время в формате ISO.  
-
-#### Пример
 ```bash
-$ curl "http://localhost:8000/v1/forecast/?city=Moscow&dt=2020-10-02T00:00:00"
-{"city":"Moscow","temperature":100.500,"unit":"celsius"}
+for TIME in {0..59}; do curl -X POST "http://127.0.0.1/v1/forecast/" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\"city\": \"Moscow\", \"timestamp\": \"2020-11-27T00:$TIME:00Z\", \"temperature\": 12}"; done
 ```
 
-### `/v1/current/`
-Показывает погоду на текущее время в заданном городе.
+Скан ключей на редисах:
 
-#### Аргументы
-city `str` — название города на английском,
-
-#### Пример
 ```bash
-$ curl "http://localhost:8000/v1/current/?city=Moscow"
-{"city":"Moscow","temperature":100.500,"unit":"celsius"}
+for PORT in {7001..7006}; do print "$PORT: "; echo keys \* | redis-cli -p "$PORT"; echo; done
+``` 
+
+Уронить редис:
+
+```bash
+docker stop redis-2
 ```
