@@ -9,7 +9,7 @@ docker-compose up
 Чтобы объединить редисы в кластер:
 
 ```bash
-echo yes | redis-cli --cluster create 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005 127.0.0.1:7006 --cluster-replicas 1 --verbose
+docker exec -it redis-1 redis-cli --cluster create 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005 127.0.0.1:7006 --cluster-replicas 1 --verbose
 ```
 
 Далее записываем кучу данных на редисы:
