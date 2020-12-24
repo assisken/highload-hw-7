@@ -21,7 +21,7 @@ for TIME in {0..29}; do curl -X POST "http://127.0.0.1/v1/forecast/" -H  "accept
 Просканим ключи на всех редисах:
 
 ```bash
-for PORT in {7001..7006}; do print "$PORT: "; echo keys \* | redis-cli -p "$PORT"; echo; done
+for PORT in {7001..7006}; do echo "$PORT: "; echo keys \* | redis-cli -p "$PORT"; echo; done
 ``` 
 
 Заметим, что на любых двух редисах одинаковые данные.
@@ -35,7 +35,7 @@ docker stop redis-2
 Проверим, что он пропал:
 
 ```bash
-for PORT in {7001..7006}; do print "$PORT: "; echo keys \* | redis-cli -p "$PORT"; echo; done
+for PORT in {7001..7006}; do echo "$PORT: "; echo keys \* | redis-cli -p "$PORT"; echo; done
 ``` 
 
 Ещё кучу данных напишем в редисы, чтобы проверить, как вновь поднятый редис догонит.
@@ -47,7 +47,7 @@ for TIME in {30..59}; do curl -X POST "http://127.0.0.1/v1/forecast/" -H  "accep
 Посмотрим, как записалось:
 
 ```bash
-for PORT in {7001..7006}; do print "$PORT: "; echo keys \* | redis-cli -p "$PORT"; echo; done
+for PORT in {7001..7006}; do echo "$PORT: "; echo keys \* | redis-cli -p "$PORT"; echo; done
 ``` 
 
 Подымим упавший редис:
@@ -59,7 +59,7 @@ docker-compose up -d redis-2
 Посмотрим, как догнал:
 
 ```bash
-for PORT in {7001..7006}; do print "$PORT: "; echo keys \* | redis-cli -p "$PORT"; echo; done
+for PORT in {7001..7006}; do echo "$PORT: "; echo keys \* | redis-cli -p "$PORT"; echo; done
 ``` 
 
 Всё!
